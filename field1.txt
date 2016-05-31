@@ -1,0 +1,15 @@
+Field:0,360,right
+Enemy:10,12,4
+Enemy:6,10,2
+Enemy:3,20,5
+Enemy:1,16,8
+Corner:200,360,up
+Corner:200,100,right
+Corner:350,100,down
+Corner:350,560,right
+Corner:500,560,up
+Corner:500,360,right
+Tower:4,10,300,300,1
+Tower:3,20,200,200,0
+Tower:5,20,80,500,0
+Player:600,5
