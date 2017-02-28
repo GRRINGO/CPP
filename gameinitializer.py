@@ -83,7 +83,7 @@ class Reader:
 		i = 0
 
 		while i < length:
-			tower_t = Tower(const.JOKU4,40,40,self.towerTypesList[i][0],self.towerTypesList[i][1],self.towerTypesList[i][2],self.towerTypesList[i][3],self.towerTypesList[i][4])
+			tower_t = Tower(const.GREEN,40,40,self.towerTypesList[i][0],self.towerTypesList[i][1],self.towerTypesList[i][2],self.towerTypesList[i][3],self.towerTypesList[i][4])
 			tower_t.rect.x = 200+i*50
 			tower_t.rect.y = 20
 			i += 1
@@ -166,7 +166,7 @@ class Reader:
 				y = self.cornerList[a][1]
 
 
-			block = Block(const.JOKU3,width,height,x,y)
+			block = Block(const.BLUE,width,height,x,y)
 			self.gamefield.add(block)
 			a +=1
 

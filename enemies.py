@@ -53,7 +53,7 @@ class Enemies(pygame.sprite.Sprite) :
 	def spawn(self,waveNumber,enemyCounter,spawnCounter,drawList):
 		wave = self.enemyList[waveNumber]
 		list1 = drawList
-		list1.add(Enemy(const.JOKU1,30,30,wave[1],wave[2],self.startPoint[0],self.startPoint[1],self.startPoint[2]))
+		list1.add(Enemy(const.ORANGE,30,30,wave[1],wave[2],self.startPoint[0],self.startPoint[1],self.startPoint[2]))
 		self.enemyGroup = list1
 		if enemyCounter == 1:
 			self.enemyList.remove(wave)

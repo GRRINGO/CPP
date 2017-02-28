@@ -50,7 +50,7 @@ while True:
 		if event.type == MOUSEBUTTONDOWN :
 			for i in reader.towerGroup:
 				if i.towerSelected() == True and player1.getMoney() > i.getCost() and buyTime == True:
-					towerT = Tower(const.JOKU2,40,40,i.getDmg(),i.getAttackSpeed(),i.getRadius(),i.getCost(),i.getIfSmart())
+					towerT = Tower(const.RED,40,40,i.getDmg(),i.getAttackSpeed(),i.getRadius(),i.getCost(),i.getIfSmart())
 					towerT.rect.x = i.rect.x
 					towerT.rect.y = i.rect.y
 					player1.addTower(towerT)
@@ -83,7 +83,7 @@ while True:
 
 
 	
-	enemy_0 = Enemy(const.JOKU2,1,1,1,0,0,0,'down')
+	enemy_0 = Enemy(const.RED,1,1,1,0,0,0,'down')
 	SCREEN.fill((0,0,0))
 	gamefield.draw(SCREEN)
 	#piirretään kenttä
@@ -107,7 +107,7 @@ while True:
 	#piirto komentojen kutsu
 
 	for t in player1.towers:
-		pygame.draw.circle(SCREEN,const.JOKU5,t.getPos(),t.getRadius(),2)
+		pygame.draw.circle(SCREEN,const.GREEN2,t.getPos(),t.getRadius(),2)
 	#piirretään tornien katama ympyrät
 
 	if k % 2 == 0:
@@ -135,7 +135,7 @@ while True:
 					h.filler = shotCount
 
 		if h.filler +80 == shotCount:
-			h.image.fill(const.JOKU2)
+			h.image.fill(const.RED)
 	#tässä myös erotellaan toiminnot tyhmille ja fiksuille torneille
 
 	pygame.display.update()

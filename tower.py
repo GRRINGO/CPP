@@ -16,7 +16,7 @@ class Tower(pygame.sprite.Sprite):
 		self.cost = cost
 		self.alive = False
 		self.smartTower = smart
-		self.target = Enemy(const.JOKU,1,1,100000,0,10000,10000,0)
+		self.target = Enemy(const.PINK,1,1,100000,0,10000,10000,0)
 
 		self.filler = 0
 
@@ -112,7 +112,7 @@ class Tower(pygame.sprite.Sprite):
 		#lisätietoa dokumentoinnissa kohdassa algoritmit
 
 	def closestEnemy(self,enemyList):
-		closest = Enemy(const.JOKU,1,1,1,0,0,0,0)
+		closest = Enemy(const.PINK,1,1,1,0,0,0,0)
 		dist = self.radius+1
 		for i in enemyList:
 			tempDist = self.distanceToEnemy(i)
