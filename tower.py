@@ -6,6 +6,7 @@ from pygame.locals import *
 
 
 class Tower(pygame.sprite.Sprite):
+	"""Class for holding the towers' information and functions related to them."""
 	def __init__(self,color,width,height,dmg,attackSpeed,radius,cost,smart):
 		super().__init__()
 
@@ -23,15 +24,16 @@ class Tower(pygame.sprite.Sprite):
 		self.image = pygame.Surface([width,height]) 
 		self.image.fill(color)
 		self.rect = self.image.get_rect()
-		#alustetaan torni
+		self.mask = pygame.mask.from_surface(self.image)
+
 
 	def towerSelected(self):
+		"""Check if tower is selected. This is used for the tower catalog."""
 		mouse_pos = pygame.mouse.get_pos()
 		pos = self.getPos()
 		if pos[0] < mouse_pos[0] < pos[0]+self.rect.width and pos[1] < mouse_pos[1] < pos[1]+self.rect.height :
 			return True
 		else : return False
-		#tarkastellaan onko hiiri tornin päällä. Metodi tulee tarpeen kun torneja ostetaan
 
 	def getDmg(self):
 		return self.dmg
@@ -62,6 +64,7 @@ class Tower(pygame.sprite.Sprite):
 		self.alive = aliveValue
 
 	def shoot(self,enemy,player):
+		"""Handle the shooting of an enemy."""
 		e_pos = enemy.getPos()
 		dist2 = self.distanceToEnemy(enemy)
 
@@ -71,9 +74,6 @@ class Tower(pygame.sprite.Sprite):
 		if enemy.getHp() <= 0:
 			enemy.killEnemy(player)
 
-		#metodi hoitaa ampumisen eli väläyttää tornia valkoisena hetken
-		#kutsuu viholliselle metodia jolla siltä vähennetään hp:ta
-		#ja lisäksi tarkastelee kuoliko vihollinen iskusta
 
 	def moveTower(self,pos_x,pos_y):
 		if self.towerSet == False:
@@ -81,13 +81,12 @@ class Tower(pygame.sprite.Sprite):
 			self.rect.y = pos_y
 			self.alive = True
 			self.towerSet = True
-		#liikuttaa tornia ja asettaa sen aktiiviseksi ja merkitsee että
-		#tornia ei voi enää liikuttaa
 
 	def setTowerState(self,setValue):
 		self.towerSet = setValue
 
 	def distanceToEnemy(self,enemy):
+		"""Return the distance between tower and a specific enemy."""
 		t_pos = self.getPos()
 		e_pos = enemy.getPos()
 
@@ -108,10 +107,10 @@ class Tower(pygame.sprite.Sprite):
 			dist1 = self.radius+10
 
 		return dist1
-		#lasketaan etäisyys tornin ja vihollisen välillä
-		#lisätietoa dokumentoinnissa kohdassa algoritmit
+
 
 	def closestEnemy(self,enemyList):
+		"""Return which enemy is closest to the tower."""
 		closest = Enemy(const.PINK,1,1,1,0,0,0,0)
 		dist = self.radius+1
 		for i in enemyList:
@@ -119,9 +118,6 @@ class Tower(pygame.sprite.Sprite):
 			if tempDist < dist:
 				closest = i
 		return closest
-		#laskee mikä kaikista elävistä vihollisista on lähimpänä tornia
-		#tässä vertaillaan vihollisten etäisyyttä torniin ja katsotaan mikä
-		#loppujen lopuksi on lähimpänä ja palautetaan se
 
 	def enemyInRange(self,enemy):
 		distance = self.distanceToEnemy(enemy)
@@ -129,9 +125,9 @@ class Tower(pygame.sprite.Sprite):
 			return True
 		else:
 			return False
-		#tarkastellaan onko jokin vihollinen kantamalla
 
 	def notInPath(self,blocks,pos):
+		"""This is used so player cannot place towers on the enemy path and block them from moving."""
 		check = 0
 		for i in blocks :
 			if ((pos[0] < i.rect.x and pos[0]+40 < i.rect.x )
@@ -144,7 +140,4 @@ class Tower(pygame.sprite.Sprite):
 				return False
 		if check == 0:
 			return True
-		#tarkastellaan onko torni vihollisten reitin päällä kun torni ostetaan
-		#ja se yritetään asettaa tiettyyn paikkaan
-
 		

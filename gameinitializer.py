@@ -5,8 +5,11 @@ from tower import Tower
 from enemies import Enemies
 from pygame.locals import *
 
+
+
 pygame.font.init()
 class Block(pygame.sprite.Sprite):
+	"""Class for simple block. Blocks are used to create the gamefield."""
 	def __init__(self,color,width,height,x,y):
 		super().__init__()
 		self.image = pygame.Surface([width,height]) 
@@ -16,9 +19,10 @@ class Block(pygame.sprite.Sprite):
 		self.height = height
 		self.rect.x = x
 		self.rect.y = y
-	#kenttä palikan alustus
+
 
 class Reader:
+	"""Class for reading and interpreting the txt file from which the gamefield is initialized."""
 	def __init__(self,textfile):
 		self.textfile = textfile
 		self.enemyList = []
@@ -30,7 +34,7 @@ class Reader:
 		self.startPoint = []
 		self.gamefield = pygame.sprite.Group()
 		self.towerGroup = pygame.sprite.Group()
-	#lukijan alustus
+
 	def readFile(self):
 
 		with open(self.textfile) as file:
@@ -61,7 +65,7 @@ class Reader:
 					self.player2 = [int(player[0]),int(player[1])]
 
 		file.close()
-		#luetaan asetustiedosto rivi riviltä ja lisäillään tiedot lukija self. tietoihin
+
 
 	def getEnemiesList(self):
 		return self.enemyList
@@ -79,6 +83,7 @@ class Reader:
 		return self.gamefield
 
 	def setTowerImages(self):
+		"""Set tower images to tower catalog."""
 		length = len(self.towerTypesList)
 		i = 0
 
@@ -91,16 +96,15 @@ class Reader:
 			font1 = pygame.font.SysFont('Arial',30)
 			font = font1.render(str(i),True,(255,255,255),None)
 			self.towerImages.append(font)
-		#luodaan ns. tornikatalogi josta tornit ostetaan
 
 	def drawTowerNumbers(self,surf):
 		i = 0
 		while i < len(self.towerImages):
 			surf.blit(self.towerImages[i],(200+i*50,20))
 			i += 1
-		#numeroidaan katalogin tornit tunnistusta varten
 
 	def initExplanations(self):
+		"""Initialize tower explanations."""
 		i = 0
 		font2 = pygame.font.SysFont('Arial',12)
 		while i < len(self.towerTypesList):
@@ -113,16 +117,16 @@ class Reader:
 			fontb = font2.render(string,True,(255,255,255),None)
 			self.explanations.append(fontb)
 			i += 1
-		#alustetaan tornien selitykset joissa kerrotaan kunkin tornin "tekniset tiedot"
 
 	def drawExplanations(self,surf):
 		i = 0
 		while i < len(self.explanations):
 			surf.blit(self.explanations[i],(450,20+i*15))
 			i += 1
-		#totetuttaa käytännön piirtämisen selityksille
+
 
 	def initializeGamefield(self):
+		"""Initialize the gamefield accordingly."""
 		a = 0
 		point = self.startPoint
 		list_length = len(self.cornerList)
@@ -170,7 +174,7 @@ class Reader:
 			self.gamefield.add(block)
 			a +=1
 
-		#alustetaan reitti vihollisille lisätietoa dokumentoinnissa
+
 
 
 

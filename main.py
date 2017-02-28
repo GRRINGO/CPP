@@ -8,7 +8,7 @@ from gameinitializer import Reader
 from player import Player
 from pygame.locals import *
 
-#initialize stuff before gameloop
+#Initialize various things before gameloop.
 reader = Reader(input('Enter the name of the file(must be in the same folder):'))
 clock = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((const.SCREEN_WIDTH,const.SCREEN_HEIGHT))
@@ -20,7 +20,7 @@ reader.initExplanations()
 
 gamefield = reader.getGamefield()
 player1 = Player(reader.player2[0],reader.player2[1])
-#player1.initInfo()
+
 corners = reader.getCornerList()
 towerTypes = reader.getTowerTypes()
 
@@ -37,8 +37,9 @@ buyTime = True
 k = 1
 r = 1
 
+#The actual gameloop.
 while True:  
-
+	#Event listener for keypresses mouse clicks etc.
 	for event in pygame.event.get():
 		if event.type == QUIT:
 			pygame.quit()
@@ -93,7 +94,7 @@ while True:
 		buyTime = False
 	else : buyTime = True
 
-	
+	#Draw everything.
 	enemiess.drawEnemies(SCREEN)
 	enemiess.moveEnemies(corners,player1)
 	reader.towerGroup.draw(SCREEN)
@@ -101,7 +102,7 @@ while True:
 	reader.drawTowerNumbers(SCREEN)
 
 	for t in player1.towers:
-		pygame.draw.circle(SCREEN,const.GREEN2,t.getPos(),t.getRadius(),2)
+		pygame.draw.circle(SCREEN,const.DARK_GREEN,t.getPos(),t.getRadius(),2)
 
 	if k % 2 == 0:
 		reader.drawExplanations(SCREEN)

@@ -1,5 +1,3 @@
-This was created as a school project for a Python course. Grade 4/5.
-
 This is a Python Tower Defense project using pygame library.
 
 Pygame installation instructions:

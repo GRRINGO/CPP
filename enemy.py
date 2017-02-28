@@ -3,6 +3,8 @@ import const
 
 
 class Enemy(pygame.sprite.Sprite):
+	"""Class for a single enemy."""
+
 	def __init__(self,color,width,height,hp,speed,x,y,direct):
 		super().__init__()
 
@@ -20,7 +22,7 @@ class Enemy(pygame.sprite.Sprite):
 
 		self.rect.x = x
 		self.rect.y = y
-		#vihollisen alustus
+
 
 	def reduceHp(self,dmgTaken):
 		self.hp = self.hp - dmgTaken
@@ -41,8 +43,7 @@ class Enemy(pygame.sprite.Sprite):
 
 		if (direction == 'up'):
 			self.rect.y -= self.speed
-		#metodi liikuttaa yhtä vihollista tiettyyn suuntaan, suunnat on merkitty
-		#pelin alustustekstitiedossa
+
 	def getPos(self):
 		pos = (self.rect.x,self.rect.y)
 		return pos
@@ -53,11 +54,11 @@ class Enemy(pygame.sprite.Sprite):
 	def killEnemy(self,player):
 		player.addMoney(self.reward)
 		self.kill()
-		#tämä metodi tuhoaa vihollisen ja antaa pelaajalle palkkion tappamisesta
 
 	def didEnemySurvive(self,player):
+		"""Check if enemy survivde the field and got outside borders."""
 		if self.rect.x >= const.SCREEN_WIDTH or self.rect.y >= const.SCREEN_HEIGHT:
 			player.enemyPassed()
 			self.kill()
-		#tarkastelee selvisikö vihollinen maaliin. Toisin sanoen tarkastelee
-		#onko vihollisen sijainti näkyvän ruudun ulkopuolella
+			print(player.enemyPassLimit)
+
